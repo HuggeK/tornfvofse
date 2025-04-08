@@ -1,0 +1,294 @@
+<!doctype html>
+<html class="" lang="sv">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Törn och Törngöls FVOF</title>
+  <link rel="canonical" href="https://tornfvof.se/" />
+  <link rel="icon" type="image/svg+xml" href="/images/tornfvof_logo.svg" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="icon" type="image/png" href="/images/favicon2.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <meta name="description" content="Törn och Törngöls FVOF" />
+  <meta name="keywords" content="Törn fiske, Fiskekort, Fiskekort Törn, Fiskevård, Fiske, Törn fish, Torn Fish, Törn Fish, Törn Fishing, Torn fishing permit, fishing permit Törn" />
+  <meta name="robots" content="index, follow" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <style>
+      @font-face { font-family: Merienda; src: url('Merienda-VariableFont_wght.ttf'); } 
+      h1, h2, h3, h4 {
+         font-family: Merienda;
+
+      }
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+      }
+      figure {
+        margin-left: 0px
+      }
+      figcaption {
+        font-style: italic;
+        background-color:bisque;
+      }
+      .image {
+        max-width: 100%;
+        height: auto;
+      }
+      .header_href{
+        color: black;
+        text-decoration: none;
+      }
+      .header_href:hover {
+        color: black;
+        text-decoration: underline;
+      }
+
+      /* For devices 400px and larger: */
+      @media only screen and (min-device-width: 400px) {
+        .image, figcaption {
+          max-width: 40%;
+          height: auto;
+        }
+      }
+
+      .small-image {
+        max-width: 50%;
+        height: auto;
+      }
+      /* For devices 400px and larger: */
+      @media only screen and (min-device-width: 400px) {
+        .small-image, figcaption {
+          max-width: 20%;
+          height: auto;
+        }
+      }
+    </style>
+    <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
+  </head>
+
+  <body>
+    <main>
+      <h1 class="center">
+        Törn och Törngöls FVOF
+      </h1>
+
+      <img src="/images/tornfvof_logo.svg" alt="Törn och Törngöls FVOF logga med sjön Törn i mitten." width="350" />
+      
+    </main>
+
+    <section>
+      <h2 id="Fiskekort"><a href="https://tornfvof.se/#Fiskekort" class="header_href">Fiskekort</a></h2>
+      Fiskekort köps igenom iFiske. <a href="https://www.ifiske.se/a/552">Extern länk⬈</a>
+      <ul>
+        <li>
+          <p>Frågor om fiskekort: <a href="mailto:fiskekort@tornfvof.se"> fiskekort@tornfvof.se</a></p>
+        </li>
+        <li>
+          <p>Återbetalning fiskekort: 
+          <a href="mailto:ifiskerefund@tornfvof.se"> ifiskerefund@tornfvof.se
+          </a></p>
+        </li>
+    </ul>
+  </section>
+
+  <section>
+    <p style="width: 100%;">
+      <iframe style="border: none; width: 100%; height: 350px;" src="https://www.ifiske.se/sv/store/2ca80840" width="100%" height="720" scrolling="no" title="Fiskekort"></iframe>
+    </p>
+    <div style="box-shadow: 10px 10px 10px 10px #40444a;
+                background-color: #9bc67a;
+                display: inline-block;">
+      <p style="padding-left: 10px;
+                padding-right: 10px;
+                line-height: 2;">
+        Fritt fiske för barn och ungdomar till och med en ålder av 17 år.
+        Målsman måste ha tagit del av och godkänt gällande <a href="https://www.ifiske.se/rule/sv/1824">fiskeregler</a> och föreskrifter.</p>
+    </div>
+    
+    <br><br><br>
+    <figure>
+      <img src="/tornbok/Utsikt över Törn ifrån naturreservatet i Ekeboryd - lossy.webp" alt="Målad bild på Utsikt över Törn ifrån naturreservatet i Ekeboryd" class="image">
+      <figcaption>Utsikt över Törn ifrån naturreservatet i Ekeboryd. © Erland Schön 1981. </figcaption>
+    </figure>
+    <h2 id="Regler"><a href="https://tornfvof.se/#Regler" class="header_href">Regler:</a></h2>
+    <p style="width: 100%;">
+      <iframe style="border: none; width: 100%; height: 1800px;" src="https://www.ifiske.se/sv/rules/2ca80840" width="100%" height="720" scrolling="no" title="Regler fiskekort"></iframe>
+    </p>
+  </section>
+  <figure>
+    <img src="tornbok/sundon nabbarna - lossy.webp" alt="Tecknad bild över Sundön - Nabbarna." class="image">
+    <figcaption>Sundön Nabbarn. © Erland Schön 1981. </figcaption>
+  </figure>
+  <section>
+    <h2 id="Vattenomroden"><a href="" class="header_href">Vattenområden Törn:</a></h2>
+    <section>
+      <!-- add MapLibre JavaScript and CSS -->
+      <script src="https://tiles.versatiles.org/assets/lib/maplibre-gl/maplibre-gl.js"></script>
+      <link href="https://tiles.versatiles.org/assets/lib/maplibre-gl/maplibre-gl.css" rel="stylesheet" />
+
+      <!-- add container for the map -->
+      <div id="map" style="width:100%;aspect-ratio:16/9"></div>
+
+      <!-- start map -->
+      <script>
+        const bounds = [
+        [15.118889, 56.431250], // Southwest coordinates
+        [15.792722, 56.696583]  // Northeast coordinate
+        ];
+        const map = new maplibregl.Map({
+        container: 'map', // container id
+        style:
+            'https://tiles.versatiles.org/assets/styles/colorful/style.json',
+        center: [15.53275, 56.562472], // starting position,  [lng, lat]
+        zoom: 12, // starting zoom
+        maxBounds: bounds // Sets bounds as max
+        });
+
+        // Add geolocate control to the map.
+        map.addControl(
+            new maplibregl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            })
+        );
+
+        map.addControl(new maplibregl.NavigationControl())
+
+      </script>
+    </section>
+  </section>
+  <section>
+    <h2 id="depthcharts"><a href="https://tornfvof.se/#depthcharts" class="header_href">Djupkartor/batymetri:</a></h2>
+
+    <h4>Törn:</h4>
+    <ol>
+      <li><a href="/djupkartor/Djupkarta 1981 Törn 627100-148506 1-0152_Törn_627100-148506.tif" target="_blank">Djupkarta Törn ekolodad 1981⬈</a> © SMHI Vattenwebb, verket är ej modifierat. <a href=" https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> </li>
+
+    </ol>
+    <h4>Törngöl:</h4>
+    <ol>
+      <li><a href="/djupkartor/Djupkarta Törngöl 627326-148250 5-0472_Törngöl_627326-148250.tif" target="_blank">Djupkarta Törngöl okänt årtal⬈</a> © SMHI Vattenwebb, verket är ej modifierat <a href=" https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> </li>
+    </ol>
+  </section>
+  
+  <figure>
+    <img src="tornbok/Lilla Kläpp - lossy.webp" alt="Bild över lilla Kläpp" class="image">
+    <figcaption>Bild över lilla Kläpp där sjöns djupaste del finns. © Erland Schön 1981. </figcaption>
+  </figure>
+
+  <section>
+    <h2 id="pointers"><a href="https://tornfvof.se/#pointers" class="header_href">Råd vid Catch & Release</a></h2>
+    
+    <div style="box-shadow: 10px 10px 10px 10px #40444a;
+                background-color: #9bc67a;
+                line-height: 2;
+                display: inline-block;
+                margin-right: 10px">
+    <p style="padding-left: 25px;">
+    Cirka sex av tio fiskar som fångas i sportfiske sätts tillbaka i vattnet genom Catch & Release. <br>
+    Avgörande för hur fisken klarar sig är att den hanteras rätt vid fångsten. <br>
+    Fiskekonsult Carl-Johan Månsson på CJ Natur har sammanställt en lista med råd för ett lyckat återsläppsfiske.
+    </p>
+      <ul style="line-height: 2;
+                 font-weight: bold;">
+      <li>Använd anpassad utrustning som minimerar drillningstiden. Att ha vek utrustning för att fisken ska kunna rusa och kännas i spöet mycket är inte god fiskeetik.</li>
+
+      <li>Kroka helst av fisken i vattnet och låt den simma i väg.</li>
+
+      <li>Om du ska väga, mäta och fotografera fisken så gör detta snabbt, max 20–30 sekunder bör fisken vara uppe i luften.</li>
+
+      <li>Fiska inte efter känsligare arter när det är över 20 grader i vattnet. Fiska inte gädda och gös när det är alltför kallt på vintern, helst inte kallare än ett par minusgrader i luften bör det vara om du ska sätta tillbaka fisken.</li>
+
+      <li>Håll fisken med stöd under buken och håll fisken horisontalt för att inte inre organ ska påfrestas.</li>
+
+      <li>Blöt händer, håv och underlag när du ska handskas med fisk.</li>
+
+      <li>Träna på C&R för att bli snabb och värna om fisken.</li>
+
+      <li>En fisk som ska återutsättas hålls på rätt köl i vattnet en stund innan den får simma iväg av egen kraft. Ett bra sätt är att kroka av fisken liggande i håven och när detta är gjort kan bara håven vändas om och fisken är fri.</li>
+
+      <li>Det finns idag en mängd bra utrustning som kan användas vid C&R; underlagsmattor, håvar, vågpåsar att väga fisken i, kroklossare/tänger mm.</li>
+
+      <li>Rapportera in fångsten (både fångst och 0-fångst) till iFiske</li>
+    </ul>
+    </div>
+  </section>
+
+  <br><br>
+
+  <figure>
+    <img src="tornbok/Törestorp - lossy.webp" alt="Bild över Törestorp med en fiskebåt på sjön" class="image">
+    <figcaption>Törestorp. © Erland Schön 1981.</figcaption>
+  </figure>
+
+  <section>
+    <h2 id="Kontakt"><a href="https://tornfvof.se/#Kontakt" class="header_href">Kontakt</a></h2>
+    <p> Ordförande: <a href="mailto:ordforande@tornfvof.se"> ordforande@tornfvof.se</a>
+    </p>
+    <p> Sekreterare: <a href="mailto:sekreterare@tornfvof.se"> sekreterare@tornfvof.se</a>
+    </p>
+    <p> Kassör: <a href="mailto:kassor@tornfvof.se"> kassor@tornfvof.se</a>
+    </p>
+    <p> Aktivitetsansvarig: <a href="mailto:aktivitet@tornfvof.se"> aktivitet@tornfvof.se</a>
+    </p>
+    <p> Valberedning: <a href="mailto:valberedning@tornfvof.se"> valberedning@tornfvof.se</a>
+    </p>
+    <p> Webbansvarig: <a href="mailto:web@tornfvof.se">web@tornfvof.se</a></p>
+  </section>
+  
+  <section>
+    <figure>
+      <img src="/tornbok/Fiskerimöte Skäppebo Juli 1977 - lossy.webp" alt="Bild på folk som fiskar på Fiskerimöte Skäppebo Juli 1977" class="image">
+      <figcaption>Fiskerimöte Skäppebo Juli 1977. Fotograf: Walter Rudolfsson</figcaption>
+    </figure>
+  </section>
+
+  <section> 
+    <h2 id="Stadgar"><a href="https://tornfvof.se/#Stadgar" class="header_href">Stadgar</a></h2>
+    <a href="/stadgar.pdf" target="_blank">Stadgar Törn och Törngöls FVOF 1962⬈</a>
+  </section>
+
+  <section>
+    <h2 id="Dokument"><a href="https://tornfvof.se/#Dokument" class="header_href">Dokument</a></h2>
+    <a href="/Informationslapp Fiskekort Törn och Törngöls FVOF.pdf" target="_blank">Informationslapp fiskekort(Skriv gärna ut!)⬈</a>
+  </section>
+
+
+  <section>
+    <h3>Föreningen är medlem i: </h3>
+
+    <ul style="line-height: 2">
+      <li><a href="https://www.vattenagarna.se/">Sveriges fiskevattenägarförbund <img src="/images/vattenagarna_logo_liten.webp" alt="Sveriges fiskevattenägarförbunds logga" width="40"></a></li>
+      <li><a href="https://www.lyckebyan.se/">Lyckebyåns vattenförbund<img src="/images/Lyckebyåns-Vattenförbund-Logo.jpg " alt="Lyckebyåns vattenförbund logga" width="100"></a></li>
+    </ul>
+
+  </section>
+
+  <section> 
+    <h3>Mer information om Sjön Törn:</h3>
+    <figure>
+      <img src="tornbok/Framsida Törnbok lossy.webp" alt="Framsida av Törn-" class="small-image">
+      <figcaption>Omslag Törn. © Erland Schön 1981. </figcaption>
+    </figure>
+    <p style="white-space: nowrap; display: inline;">1977 skrevs boken<div style="font-style: italic; display: inline">Törn en sjö i Småland</div> i ett samarbete mellan <a href="https://www.xn--vissefjrdahembygdsfrening-rec21c.se/">Vissefjärda hembygdsförening</a> och <a href="https://www.hembygd.se/langasjo">Långasjö Sockens Hembygdsförening</a> </p>
+
+  </section>
+  
+  <figure>
+    <img src="tornbok/Utanför Hovgård - lossy.webp" alt="Bild över delen Hovgård i Sjön" class="image">
+    <figcaption>Hovgård. © Erland Schön 1981.</figcaption>
+  </figure>
+
+  <footer>
+  <br>
+  <p>Material på denna sidan är licenserad enligt <a href="https://creativecommons.org/licenses/by/4.0/deed.sv"> CC BY 4.0</a> om inget annat uppges.</p>
+  <section style="display: inline-block;"> © Törn och Törngöls FVOF 802600-8659</section>
+  </footer>
+
+  </body>
+</html>
