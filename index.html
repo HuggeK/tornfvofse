@@ -140,12 +140,14 @@
         ];
         const map = new maplibregl.Map({
         container: 'map', // container id
-        style:
-            'https://tiles.versatiles.org/assets/styles/colorful/style.json',
+        style: 'https://tiles.versatiles.org/assets/styles/colorful/style.json',
         center: [15.53275, 56.562472], // starting position,  [lng, lat]
         zoom: 12, // starting zoom
         maxBounds: bounds // Sets bounds as max
         });
+
+
+        
 
         // Add geolocate control to the map.
         map.addControl(
@@ -156,7 +158,7 @@
                 trackUserLocation: true
             })
         );
-
+            
         map.addControl(new maplibregl.NavigationControl())
 
       </script>
