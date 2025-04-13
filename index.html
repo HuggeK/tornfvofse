@@ -64,6 +64,13 @@
           height: auto;
         }
       }
+
+      /* Maplibre styles: */
+      .maplibregl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      }
+
     </style>
     <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
     <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
@@ -146,8 +153,52 @@
         maxBounds: bounds // Sets bounds as max
         });
 
+        map.on('load', () => {
+          // Add a source for the state polygons.
+          map.addSource('va-areas', {
+              'type': 'geojson',
+              'data': '/maps/vattenomraden/test_va_omrade.geojson'
+          });
 
-        
+          // Add a layer showing the state polygons.
+          map.addLayer({
+              'id': 'va-areas-layer',
+              'type': 'fill',
+              'source': 'va-areas',
+              'paint': {
+                  'fill-color': 'rgba(200, 100, 240, 0.4)',
+                  'fill-outline-color': 'rgba(200, 100, 240, 1)'
+              }
+          });
+
+          // When a click event occurs on a feature in the states layer, open a popup at the
+          // location of the click, with description HTML from its properties.
+          map.on('click', 'va-areas-layer', (e) => {
+              new maplibregl.Popup()
+                  .setLngLat(e.lngLat)
+                  .setHTML(e.features[0].properties.name)
+                  .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the states layer.
+        map.on('mouseenter', 'states-layer', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'states-layer', () => {
+            map.getCanvas().style.cursor = '';
+        });
+      });
+        // Add Lantmäteriets Licension information into the attribution field in the geoJson.
+/*         map.addSource('attribution', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: []
+        },
+        attribution: ''
+        }); */
 
         // Add geolocate control to the map.
         map.addControl(
@@ -158,6 +209,7 @@
                 trackUserLocation: true
             })
         );
+
             
         map.addControl(new maplibregl.NavigationControl())
 
