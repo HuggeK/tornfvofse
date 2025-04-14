@@ -1,1 +1,3 @@
-A simple single file html website made for Törn och Törngöls FVOF becuase I want to be able to hand it over to someone else.
+A simple single file html website made for Törn och Törngöls FVOF.
+
+My commmited code is licensed by CC BY SA 4.0. The repository could contain content which is licensed under different licenses.
