@@ -31,6 +31,7 @@
       figcaption {
         font-style: italic;
         background-color:bisque;
+        font-size: smaller;
       }
 
       .header_href{
@@ -86,8 +87,25 @@
         .small-image, figcaption {
           max-width: 20%;
           height: auto;
+          font-size: smaller;
         }
       }
+
+      .regler-iframe {
+        border: none;
+        width: 100%;
+        height: 1800px;
+      }
+      /* For devices 400px and larger: */
+      @media only screen and (min-device-width: 400px) {
+        .regler-iframe {
+          border: none;
+          width: 100%;
+          height: 800px;
+        }
+      }
+
+       /* Maplibre: */      
 
       /* Maplibre styles: */
       .maplibregl-popup {
@@ -145,8 +163,8 @@
       <figcaption>Utsikt över Törn ifrån naturreservatet i Ekeboryd. © Erland Schön 1981. </figcaption>
     </figure>
     <h2 id="Regler"><a href="https://tornfvof.se/#Regler" class="header_href">Regler:</a></h2>
-    <p style="width: 100%;">
-      <iframe style="border: none; width: 100%; height: 1800px;" src="https://www.ifiske.se/sv/rules/2ca80840" width="100%" height="720" scrolling="no" title="Regler fiskekort"></iframe>
+    <p style="width: 100%; ">
+      <iframe class="regler-iframe" src="https://www.ifiske.se/sv/rules/2ca80840" scrolling="no" title="Regler fiskekort" class=""></iframe>
     </p>
   </section>
   <figure>
