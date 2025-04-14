@@ -32,10 +32,7 @@
         font-style: italic;
         background-color:bisque;
       }
-      .image {
-        max-width: 100%;
-        height: auto;
-      }
+
       .header_href{
         color: black;
         text-decoration: none;
@@ -43,6 +40,33 @@
       .header_href:hover {
         color: black;
         text-decoration: underline;
+      }
+
+      .map-va {
+        width:100%;
+        aspect-ratio:16/9
+      }
+
+      /* For devices 400px and larger: */
+      @media only screen and (min-device-width: 400px) {
+        .map-va {
+          width: 40%;
+          aspect-ratio:16/9
+        }
+      }
+
+
+      /* For devices 400px and larger: */
+      @media only screen and (min-device-width: 400px) {
+        .image, figcaption {
+          max-width: 40%;
+          height: auto;
+        }
+      }
+
+      .image {
+        max-width: 100%;
+        height: auto;
       }
 
       /* For devices 400px and larger: */
@@ -137,7 +161,7 @@
       <link href="https://tiles.versatiles.org/assets/lib/maplibre-gl/maplibre-gl.css" rel="stylesheet" />
 
       <!-- add container for the map -->
-      <div id="map" style="width:100%;aspect-ratio:16/9"></div>
+      <div id="map" class="map-va"></div>
 
       <!-- start map -->
       <script>
