@@ -6,11 +6,11 @@ Mitt mål med denna text är att dokumentera hur jag gjorde för att jag själv 
 
 Mitt mål i framtiden med rådatan är att i ett bra format kunna använda Maplibre GL JS för att visa vattenområden igenom kod, du kan klicka på områden och igenom webbläsaren få en position av fiskaren för att säga till i vilket vattenområde denna befinner sig, detta för att hjälpa fiskare att orientera sig utan landmärken som holmar ocj öar som finns på kartan för att snabbare ge informationen denna söker.
 
-Först behöver du begära ut produkterna:
-- topografi 10 vektor. 
-- Fastighetsindelning vektor (krävs mer handläggsningstid för att ) för byagränserna
+Först behöver du begära ut produkterna ur GeoTorget.
+- [Topografi 10 Nedladdning, vektor](https://geotorget.lantmateriet.se/dokumentation/GEODOK/51/latest.html)
+- [Fastighetsindelning Nedladdning vektor](https://geotorget.lantmateriet.se/dokumentation/GEODOK/28/latest.html)(krävs mer handläggsningstid pga prövning mot fastighetsregisterlagen) för byagränserna ner i sjön.
 
-Ifrån Lantmäteriet. Notera att du alltid måste följa licensvilkoren trots att du fått godkänt på din ändamålsprövning.
+Ifrån Lantmäteriets Geotorg. Notera att du alltid måste följa licensvilkoren trots att du fått godkänt på din ändamålsprövning.
 
 Jag ansökte hos lantmäteriet och fick tillgång till live-tjänsten topografi 10. Lantmäteriet har en bra guide på hur man får in topografi 10 i QGIS, länk:
 Jag kommer använda mig av 2 komponenter i detta projekt ifrån dessa datamängder.
@@ -18,14 +18,20 @@ Jag kommer använda mig av 2 komponenter i detta projekt ifrån dessa datamängd
 - Dels de dels outredda byarnas gränser som går i sjöarna ifrån fastighetsindelningsprodukten.
 
 
-### Ladda ner och sätt upp QGIS.
-Det jag gjorde sedan var att jag laddade ner QGIS. Det är en rätt så brant inlärningskurva för QGIS men tillslut lyckades jag lära mig hur jag använde det. Skapa en mapp lokalt på din dator där du lägger projektet och alla tillhörande filer. Ställ in QGIS på engelska då det ör enklare att hitta svar på engelska forum. QGIS har två lägen. En där du skapar kartan och en där du förbereder kartan för export, lägger till skalor etc, färger, etiketter etc, Huvudvyn när du öppnar den är den första och den andra heter Layots. Följ instruktionerna på Lantmäteriets hemsida för att hämta hem topografi 10 och sätt upp det i QGIS som ett eget lager.
+QGIS version som användes: QGIS 3.42.1 men fungerar nog med den senaste versionen när du just läser detta.
+
+### Ladda ner och sätt upp QGIS
+Det jag gjorde sedan var att jag laddade ner QGIS. Det är en rätt så brant inlärningskurva för QGIS men tillslut lyckades jag lära mig hur jag använde det. Skapa en mapp lokalt på din dator där du lägger projektet och alla tillhörande filer. Ställ in QGIS på engelska då det ör enklare att hitta svar på engelska forum. QGIS har två lägen. En där du skapar kartan och en där du förbereder kartan för export, lägger till skalor etc, färger, etiketter etc, Huvudvyn när du öppnar den är den första och den andra heter Layots. 
 
 
-## Gör om geopackage till GEOJSON.
-Om detta steg är nödvändigt vet jag ej, men jag gjorde det iallafall.
+### Sätt upp Topografi 10.
+Följ instruktionerna på Lantmäteriets hemsida för att hämta hem topografi 10 och sätt upp det i QGIS som ett eget lager. Exportera "Sjö" och "Vattendragsyta" till ett eget lager för de sjöar och vattendrag du vill ha med. Viktigt är att exportera det in i en ny fil då du kanske vill jämföra med orginal-topografi-lagret samt gränserna. Nästan varje steg hädanefter skapar ett nytt lager, en ny fil som du importerar
 
-Då fastighetsindelning hämtas hem ifrån STAC API´t i rutor kan det vara så att din sjös fastighetsgränser sträcker sig över flera rutor. Du får då sammanfoga lagren som du plockar ut för att få ett enhetligt lager du sedan kan köra intersection med sjöpolygonen sedan.
+
+
+## Gör om geopackage till GEOJSON samt fastighetsindelning.
+Då fastighetsindelning hämtas hem ifrån STAC API´t i rutor kan det vara så att din sjös fastighetsgränser sträcker sig över flera rutor. Du får då sammanfoga lagren som du plockar ut för att få ett enhetligt lager du sedan kan köra intersection med sjöpolygonen sedan. Det gör du igenom att köra Vector > Data management Tools > Merge Vector layers.ä
+Jag fick göra om det till geoJSON men vet inte om det är nödvändigt. Jag använde mig av lagret registerenhetsomradesyta men traktyta går nog lika bra i datan.
 
 
 ## Använda Vector > Geoprocessing Tools > Intersection för att sortera ut de fastighetsindelningar inom sjöpolygonen.
