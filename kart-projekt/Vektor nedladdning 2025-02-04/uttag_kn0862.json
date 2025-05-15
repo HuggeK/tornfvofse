@@ -1,0 +1,807 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "byggnadsverk_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "byggnad",
+      "antalObjekt": 15593
+     },
+     {
+      "tabellnamn": "byggnadsanlaggningslinje",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "byggnadsanlaggningspunkt",
+      "antalObjekt": 40
+     },
+     {
+      "tabellnamn": "byggnadspunkt",
+      "antalObjekt": 15
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "militartomrade_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "militart_omrade",
+      "antalObjekt": 0
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "markreglering_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "bestammelse_yta",
+      "antalObjekt": 73
+     },
+     {
+      "tabellnamn": "bestammelse_begransningslinje",
+      "antalObjekt": 536
+     },
+     {
+      "tabellnamn": "bestammelse_idpunkt",
+      "antalObjekt": 26
+     },
+     {
+      "tabellnamn": "bestammelse_linje",
+      "antalObjekt": 21
+     },
+     {
+      "tabellnamn": "bestammelse_punkt",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "bestammelse_granspunkt",
+      "antalObjekt": 16
+     },
+     {
+      "tabellnamn": "plan_bestammelse_text",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "plan_yta",
+      "antalObjekt": 179
+     },
+     {
+      "tabellnamn": "plan_idpunkt",
+      "antalObjekt": 179
+     },
+     {
+      "tabellnamn": "fornlamning_yta",
+      "antalObjekt": 69
+     },
+     {
+      "tabellnamn": "fornlamning_linje",
+      "antalObjekt": 87
+     },
+     {
+      "tabellnamn": "plan_begransningslinje",
+      "antalObjekt": 692
+     },
+     {
+      "tabellnamn": "fornlamning_idpunkt",
+      "antalObjekt": 69
+     },
+     {
+      "tabellnamn": "fornlamning_punkt",
+      "antalObjekt": 318
+     },
+     {
+      "tabellnamn": "kultur_lamning_yta",
+      "antalObjekt": 284
+     },
+     {
+      "tabellnamn": "kultur_lamning_linje",
+      "antalObjekt": 333
+     },
+     {
+      "tabellnamn": "kultur_lamning_idpunkt",
+      "antalObjekt": 283
+     },
+     {
+      "tabellnamn": "forn_kultur_lamning_text",
+      "antalObjekt": 84
+     },
+     {
+      "tabellnamn": "kultur_lamning_punkt",
+      "antalObjekt": 584
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "naturvard_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "naturvardspunkt",
+      "antalObjekt": 9
+     },
+     {
+      "tabellnamn": "restriktionsomrade",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "skyddadnatur",
+      "antalObjekt": 9
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "fastighet_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "fastighetsgrans",
+      "antalObjekt": 26859
+     },
+     {
+      "tabellnamn": "lansyta",
+      "antalObjekt": 1
+     },
+     {
+      "tabellnamn": "kommunyta",
+      "antalObjekt": 1
+     },
+     {
+      "tabellnamn": "ovriga_admgranser",
+      "antalObjekt": 1093
+     },
+     {
+      "tabellnamn": "registerenhet_idpunkt",
+      "antalObjekt": 8244
+     },
+     {
+      "tabellnamn": "samfallighet_linje",
+      "antalObjekt": 36
+     },
+     {
+      "tabellnamn": "registerenhet_punkt",
+      "antalObjekt": 83
+     },
+     {
+      "tabellnamn": "registerenhet_yta",
+      "antalObjekt": 8259
+     },
+     {
+      "tabellnamn": "granspunkt",
+      "antalObjekt": 14240
+     },
+     {
+      "tabellnamn": "text_smaskalig",
+      "antalObjekt": 578
+     },
+     {
+      "tabellnamn": "text_registernummer",
+      "antalObjekt": 5061
+     },
+     {
+      "tabellnamn": "text_storskalig",
+      "antalObjekt": 3421
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "ledningar_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "ledningslinje",
+      "antalObjekt": 144
+     },
+     {
+      "tabellnamn": "transformatoromrade",
+      "antalObjekt": 5
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "hojd_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "hojdpunkt",
+      "antalObjekt": 81
+     },
+     {
+      "tabellnamn": "hojdlinje",
+      "antalObjekt": 9161
+     },
+     {
+      "tabellnamn": "hojdkurvstext",
+      "antalObjekt": 1216
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "text_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "textobjekt",
+      "antalObjekt": 2064
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "anlaggningsomrade_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "anlaggningsomrade",
+      "antalObjekt": 58
+     },
+     {
+      "tabellnamn": "anlaggningsomradespunkt",
+      "antalObjekt": 16
+     },
+     {
+      "tabellnamn": "start_landningsbana",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "flygplatsomrade",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "flygplatspunkt",
+      "antalObjekt": 0
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "rattighet_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "rattighet_ga_yta",
+      "antalObjekt": 281
+     },
+     {
+      "tabellnamn": "rattighet_ga_begransningslinje",
+      "antalObjekt": 410
+     },
+     {
+      "tabellnamn": "rattighet_ga_idpunkt",
+      "antalObjekt": 276
+     },
+     {
+      "tabellnamn": "rattighet_ga_linje",
+      "antalObjekt": 1051
+     },
+     {
+      "tabellnamn": "rattighet_ga_punkt",
+      "antalObjekt": 137
+     },
+     {
+      "tabellnamn": "rattighet_ga_granspunkt",
+      "antalObjekt": 0
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "norrapolcirkeln_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "polcirkeln",
+      "antalObjekt": 0
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "hydro_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "hydroanlaggningslinje",
+      "antalObjekt": 28
+     },
+     {
+      "tabellnamn": "hydroanlaggningspunkt",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "hydrolinje",
+      "antalObjekt": 1828
+     },
+     {
+      "tabellnamn": "hydropunkt",
+      "antalObjekt": 1035
+     },
+     {
+      "tabellnamn": "hydrografiskt_intressant_plats",
+      "antalObjekt": 0
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "mark_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "markkantlinje",
+      "antalObjekt": 17447
+     },
+     {
+      "tabellnamn": "mark",
+      "antalObjekt": 7163
+     },
+     {
+      "tabellnamn": "sankmark",
+      "antalObjekt": 2884
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "orderidentitet": "f09a9838-f2b6-47f4-a3ce-27fb5bb4eae0",
+    "filnamn": "kommunikation_kn0862.zip",
+    "statistik": [
+     {
+      "tabellnamn": "ovrig_vag",
+      "antalObjekt": 1686
+     },
+     {
+      "tabellnamn": "transportled_fjall",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "ledintressepunkt_fjall",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "farjeled",
+      "antalObjekt": 0
+     },
+     {
+      "tabellnamn": "vagpunkt",
+      "antalObjekt": 1365
+     },
+     {
+      "tabellnamn": "vaglinje",
+      "antalObjekt": 8115
+     },
+     {
+      "tabellnamn": "ralstrafik",
+      "antalObjekt": 42
+     },
+     {
+      "tabellnamn": "ralstrafikstation",
+      "antalObjekt": 2
+     }
+    ]
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       547693.371,
+       520774.564
+      ],
+      [
+       547693.371,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       6255425.292
+      ],
+      [
+       6299534.524,
+       520774.564
+      ],
+      [
+       547693.371,
+       520774.564
+      ]
+     ]
+    ]
+   }
+  }
+ ],
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:EPSG::3006"
+  }
+ }
+}
