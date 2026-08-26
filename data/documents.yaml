@@ -1,0 +1,100 @@
+# Dokumentlistorna bor här i stället för i HTML.
+# Lägg till en rad -> den dyker upp på sidan med filtyp och filstorlek.
+# Fält: title (visas), url (lokal sökväg eller extern länk; kan utelämnas
+# för rena textrader), note (liten rad under titeln, markdown-länkar ok),
+# badge (text i märket, annars automatisk).
+
+general:
+  items:
+    - title: Informationslapp fiskekort
+      url: /Informationslapp Fiskekort Törn och Törngöls FVOF.pdf
+      note: Skriv gärna ut!
+    - title: Fiskevårdsplan Törn och Törngöl 2013
+      url: /dokument/Fiskevårdsplan Törn och Törngöl 2013_Optimized - C.pdf
+    - title: PFAS och metaller i kräftor
+      url: /dokument/PFAS och metaller i Kräftor-c.pdf
+    - title: Information om arrende, nyttjanderättsavtal och servitut
+      url: /dokument/Information om Arrende Nyttjanderättsavtal och Servitut TL.pdf
+    - title: Sveriges fiskevattenägarförbunds vägledningsmaterial
+      url: https://www.vattenagarna.se/vagledningsmaterial-utan-kostnad/
+    - title: Fisketillsyn – utbildning för fisketillsynspersoner
+      url: /dokument/Utbildningsmaterial fisketillsyn.pdf
+      note: Havs- och vattenmyndigheten och Sveriges fiskevattenägarförbund
+    - title: Fiske och partiella nyttjanderätter
+      url: /dokument/fiske-partiella-nyttjanderatter.pdf
+    - title: Browning of freshwaters – Consequences to ecosystem services
+      url: /dokument/Browning-of-freshwaters-Consequences-to-ecosystem-services.pdf
+    - title: Fysisk restaurering av akvatiska miljöer 2.0 (2021:03)
+      url: /dokument/2021.03-fysisk-restaurering-av-akvatiska-miljoer-2.0_Optimized.pdf
+    - title: Förvaltningsplan för vatten 2022–2027, Södra Östersjöns vattendistrikt
+      url: /dokument/Förvaltningsplan-för-vatten-2022-2027-Södra-Östersjöns-vattendistrikt.pdf
+    - title: Förslag till stadgar – normalstadgar mall
+      url: /normalstadgar_moderniserad_version_inkl_kommentarer (002).pdf
+    - title: Stadgar Förslag 2 2025
+      url: /dokument/Stadgar Förslag 2 2025.pdf
+
+statutes:
+  items:
+    - title: Stadgar Törn och Törngöls FVOF 2026
+      url: /Törn och Törngöls Fiskevårdsområdesförenings stadgar 2026.pdf
+
+water-ruling:
+  items:
+    - title: 30379 Karlskrona vattenbortledning från Lyckebyån
+      url: /dommar/30379_Karlskrona vattenbortledning frn Lyckebyn.pdf
+    - title: 32640 Karlskrona vattenbortledning från Lyckebyån
+      url: /dommar/32640_Karlskrona vattenbortledning frn Lyckebyn.pdf
+    - title: Dombok 14/8 1970, A 62 1970, AD 27 1967
+      url: /dommar/Dombok 14 8 1970 A 62 1970 AD 27 1967.pdf
+    - title: Dombok 12/3 1974, DVA 13 1974, AD 27 1967
+      url: /dommar/Dombok 12 3 1974 DVA 13 1974 AD 27 1967.pdf
+    - title: Dombok 27/6 1979, DVA 37 1979, AD 27 1967
+      url: /dommar/Dombok 27 6 1979 DVA 37 1979 AD 27 1967.pdf
+    - title: Dombok 18/3 1983, DVA 9 1983, AD 27 1967
+      url: /dommar/Dombok 18 3 1983 DVA 9 1983 AD 27 1967.pdf
+    - title: Register aktsid
+      url: /dommar/Register.pdf
+    - title: Regleringsdamm vid sjön Törn, Linnefors Utskovsparti förslag, 023250-01
+      url: /dommar/IMG_1394.jpg
+    - title: Karlskronaregionens vattenförsörjning – regleringsberäkningar för en exceptionell lågvattenperiod (1959), aktsid 181
+      url: /dommar/pdf_download_26A85D77-5EAD-4BE8-B82B-A8B0F1871458.pdf
+    - title: Bilagor aktsidor
+      url: /dommar/pdf_download_B5E784EB-EBD2-4D50-9056-DDA639E2FF8B.pdf
+    - title: Handläggarstöd för omprövning av vattenverksamheter
+      url: /dokument/Handlaggarstod-for-omprovning-av-vattenverksamheter.pdf
+    - title: Nyttan bilaga 2 – Ekosystemtjänstkartläggning av miljöanpassad
+      url: /dokument/Nyttan bilaga 2 Ekosystemtjänstkartläggning av miljöanpassad.pdf
+    - title: Ärende hos Kalmar Länsstyrelse "Tillsyn av vattenverksamhet, följs villkor i tillstånd, Emmaboda kommun"
+      note: Diarienummer 8513-2025
+      badge: Ärende
+    - title: Råvattenflöde
+      url: /dokument/Råvattenflöde.docx
+    - title: Tillståndets efterlevnad i ärende 1187-2026 Havsjön, Blekinge Länsstyrelse
+      url: https://viss.lansstyrelsen.se/Waters.aspx?waterMSCD=WA95147965
+
+minutes:
+  items:
+    - title: Protokoll Fiskestämma 2026 med bilagor
+      url: /protokoll/Protokoll Fiskestämma 2026 Törn och Törngöls FVOF med bilagor C.pdf
+    - title: Kallelse Fiskestämma 2026 samt nya stadgeförslaget
+      url: /protokoll/Kallelse Fiskestämma 2026 Törn och Törngöls FVOF rev 3 med stadgeförslag.pdf
+    - title: Inbjudan medlemsträff Törsbogården 28 juni 2026
+      url: /protokoll/Medelemsträff Törsbo 28 juni 2026.pdf
+    - title: Fiskestämma 2025
+      url: /protokoll/Fiskestämma 2025 (1).pdf
+    - title: Fiskestämma protokoll 2025
+      url: /protokoll/Fiskestämma protokoll 2025 (1)c.pdf
+    - title: Verksamhetsberättelse 2024
+      url: /protokoll/Verksamhetsberättelse 2024 (2).pdf
+
+depth-charts-torn:
+  items:
+    - title: Djupkarta Törn, ekolodad 1981
+      url: /djupkartor/Djupkarta 1981 Törn 627100-148506 1-0152_Törn_627100-148506.tif
+      note: "© SMHI Vattenwebb, verket är ej modifierat. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)"
+
+depth-charts-torngol:
+  items:
+    - title: Djupkarta Törngöl, okänt årtal
+      url: /djupkartor/Djupkarta Törngöl 627326-148250 5-0472_Törngöl_627326-148250.tif
+      note: "© SMHI Vattenwebb, verket är ej modifierat. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)"

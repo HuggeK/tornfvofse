@@ -1,0 +1,23 @@
+{{- /* -------------------------------------------------------------------------
+     Liten inline-logga i löpande text, t.ex. i listan över föreningar.
+
+     Användning:  {{< logo src="images/vattenagarna_logo_liten.webp"
+                           alt="Sveriges fiskevattenägarförbunds logga" width="40" >}}
+
+     Rastrerade loggor skalas till 2x visningsbredden (skarpa på mobilskärmar
+     med hög pixeltäthet), SVG släpps igenom orörd. All output på EN rad så
+     att shortcoden kan stå mitt i en markdown-listrad utan att bryta den.
+     ------------------------------------------------------------------------- */ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $width := int (.Get "width" | default 40) -}}
+{{- $res := resources.Get $src -}}
+{{- if not $res -}}
+  {{- errorf "logo: hittar ingen bild på %q (anropad från %s)" $src .Position -}}
+{{- end -}}
+{{- if eq $res.MediaType.SubType "svg" -}}
+<img class="logo-inline" src="{{ $res.RelPermalink }}" alt="{{ $alt }}" width="{{ $width }}" loading="lazy" decoding="async" />
+{{- else -}}
+{{- $img := $res.Resize (printf "%dx webp" (mul $width 2)) -}}
+<img class="logo-inline" src="{{ $img.RelPermalink }}" alt="{{ $alt }}" width="{{ $width }}" height="{{ div (mul $width $img.Height) $img.Width }}" loading="lazy" decoding="async" />
+{{- end -}}

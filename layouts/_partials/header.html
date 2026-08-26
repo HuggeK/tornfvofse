@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="wrap">
+    {{ with resources.Get site.Params.logo }}
+      {{/* SVG:n är vektor – ingen omskalning behövs, men width/height
+           måste anges så att sidan inte hoppar medan den laddar. */}}
+      <img
+        class="site-header__logo"
+        src="{{ .RelPermalink }}"
+        alt="Törn och Törngöls FVOF logga med sjön Törn i mitten."
+        width="350"
+        height="350"
+        fetchpriority="high"
+      />
+    {{ end }}
+    <h1>{{ site.Title }}</h1>
+  </div>
+</header>

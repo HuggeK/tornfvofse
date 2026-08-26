@@ -1,0 +1,80 @@
+{{/* ---------------------------------------------------------------------------
+     Dokumentlista från data/documents.yaml.
+
+     Användning:  {{< docs group="minutes" >}}
+
+     Varje rad blir en 44px hög träffyta med filtyp och filstorlek, i stället
+     för en tunn textlänk som är svår att träffa med tummen. Filstorleken
+     räknas ut vid bygget – bra att veta innan man laddar ner 20 MB på 4G.
+
+     Fält per rad i yaml:
+       title  – visningsnamn (obligatoriskt)
+       url    – lokal sökväg eller extern länk; utelämnas för rena textrader
+       note   – liten rad under titeln, får innehålla markdown-länkar
+       badge  – text i märket; annars filtyp/Länk/Info automatiskt
+     --------------------------------------------------------------------------- */}}
+
+{{ $group := .Get "group" }}
+{{ $data := index hugo.Data.documents $group }}
+
+{{ if not $data }}
+  {{ errorf "docs: gruppen %q saknas i data/documents.yaml (anropad från %s)" $group .Position }}
+{{ end }}
+
+<ul class="doc-list">
+  {{ range $data.items }}
+    {{ $url := .url }}
+    {{ if $url }}
+      {{ $isExternal := hasPrefix $url "http" }}
+      {{ $ext := path.Ext $url | strings.TrimPrefix "." | upper }}
+
+      {{/* Filstorlek för lokala filer. os.Stat läser projektets filsystem,
+           så guarda med fileExists – en saknad fil ska inte fälla bygget. */}}
+      {{ $size := "" }}
+      {{ if not $isExternal }}
+        {{ $path := strings.TrimPrefix "/" $url }}
+        {{ if fileExists $path }}
+          {{ with (os.Stat $path) }}
+            {{ $mb := div (float .Size) 1048576.0 }}
+            {{ if ge $mb 1.0 }}
+              {{ $size = printf "%.1f MB" $mb }}
+            {{ else }}
+              {{ $size = printf "%.0f kB" (div (float .Size) 1024.0) }}
+            {{ end }}
+          {{ end }}
+        {{ else }}
+          {{ warnf "docs: filen %q saknas i projektet (gruppen %q)" $path $group }}
+        {{ end }}
+      {{ end }}
+
+      <li>
+        <a
+          class="doc-list__link"
+          href="{{ replace $url " " "%20" }}"
+          {{ if $isExternal }}target="_blank" rel="noopener"{{ end }}
+        >
+          <span class="doc-list__type">{{ .badge | default (cond $isExternal "Länk" $ext) }}</span>
+          <span>
+            {{ .title }}
+            <span class="doc-list__meta">
+              {{- with .note }}{{ . | markdownify }}{{ end -}}
+              {{- if and .note (or $size $isExternal) }} · {{ end -}}
+              {{- if $isExternal }}Extern länk ⬈{{ else }}{{ $size }}{{ end -}}
+            </span>
+          </span>
+        </a>
+      </li>
+    {{ else }}
+      {{/* Rad utan länk – t.ex. ett pågående ärende med diarienummer. */}}
+      <li>
+        <span class="doc-list__link doc-list__link--plain">
+          <span class="doc-list__type">{{ .badge | default "Info" }}</span>
+          <span>
+            {{ .title }}
+            {{ with .note }}<span class="doc-list__meta">{{ . | markdownify }}</span>{{ end }}
+          </span>
+        </span>
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>
