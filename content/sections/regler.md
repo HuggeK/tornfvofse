@@ -7,7 +7,7 @@ weight: 20
 
 Gällande fiskeregler hämtas direkt från iFiske, så de är alltid aktuella.
 
-{{< embed src="https://www.ifiske.se/sv/rules/2ca80840" title="Fiskeregler" ratio="3 / 5" ratioMd="4 / 3" >}}
+{{< embed src="https://www.ifiske.se/sv/rules/2ca80840" title="Fiskeregler" height="1800" heightMd="1250" >}}
 
 Om rutan ovan inte visas:
 [öppna reglerna direkt hos iFiske ⬈](https://www.ifiske.se/sv/rules/2ca80840)

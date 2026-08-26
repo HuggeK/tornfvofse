@@ -1,22 +1,43 @@
 {{/* ---------------------------------------------------------------------------
-     Lat-laddad iframe med proportionerlig ruta.
+     Lat-laddad iframe.
 
-     Ersätter mönstret `height: 1800px` som gav en enorm tom yta på mobil.
-     Rutan får sin höjd av aspect-ratio: hög och smal på telefon, bred och
-     låg på desktop. loading="lazy" gör att iFiske inte laddas förrän
-     användaren scrollar dit.
+     Två lägen:
+
+     1. Proportion (standard): rutan får sin höjd av aspect-ratio och blir
+        hög/smal på telefon, bred/låg på desktop. Innehållet scrollar i rutan.
+          {{< embed src="…" title="…" ratio="4 / 5" ratioMd="16 / 7" >}}
+
+     2. Fast höjd: som gamla sidans regler-iframe – hela innehållet visas
+        direkt i sidflödet utan inre scroll (scrolling="no").
+          {{< embed src="…" title="…" height="1800" heightMd="1250" >}}
+
+     loading="lazy" i båda lägena: iFiske hämtas först när rutan närmar sig.
      --------------------------------------------------------------------------- */}}
 
 {{ $src := .Get "src" }}
 {{ $title := .Get "title" | default "Inbäddat innehåll" }}
+{{ $height := .Get "height" }}
+{{ $heightMd := .Get "heightMd" | default $height }}
 {{ $ratio := .Get "ratio" | default "3 / 4" }}
 {{ $ratioMd := .Get "ratioMd" | default "16 / 10" }}
 
-<div class="embed" style="--embed-ratio: {{ $ratio }}; --embed-ratio-md: {{ $ratioMd }};">
-  <iframe
-    src="{{ $src }}"
-    title="{{ $title }}"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
-</div>
+{{ if $height }}
+  <div class="embed embed--fixed" style="--embed-h: {{ $height }}px; --embed-h-md: {{ $heightMd }}px;">
+    <iframe
+      src="{{ $src }}"
+      title="{{ $title }}"
+      loading="lazy"
+      scrolling="no"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+{{ else }}
+  <div class="embed" style="--embed-ratio: {{ $ratio }}; --embed-ratio-md: {{ $ratioMd }};">
+    <iframe
+      src="{{ $src }}"
+      title="{{ $title }}"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+{{ end }}

@@ -149,8 +149,8 @@ summary:focus-visible {
   height: auto;
 }
 
-/* Menyn ligger kvar överst vid scroll och blir en swipe-bar på mobil.
-   Ingen JavaScript, ingen hamburgermeny som döljer innehåll. */
+/* Menyn ligger kvar överst vid scroll. På mobil är den en hamburgermeny
+   (byggd på <details>, fungerar utan JavaScript), på desktop en centrerad rad. */
 .site-nav {
   position: sticky;
   top: 0;
@@ -161,45 +161,108 @@ summary:focus-visible {
   padding-top: env(safe-area-inset-top); /* under kameraskåran på nyare telefoner */
 }
 
-.site-nav__list {
-  display: flex;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0.4rem var(--space);
-  list-style: none;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+/* --- Mobil: hamburgare --- */
+
+.site-nav__burger {
+  position: relative;
 }
 
-.site-nav__list::-webkit-scrollbar {
+.site-nav__burger summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--tap);
+  padding: 0.4rem var(--space);
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none; /* ingen triangel */
+}
+
+.site-nav__burger summary::-webkit-details-marker {
   display: none;
 }
 
-.site-nav__list a {
+.site-nav__icon--close {
+  display: none;
+}
+
+.site-nav__burger[open] .site-nav__icon--menu {
+  display: none;
+}
+
+.site-nav__burger[open] .site-nav__icon--close {
+  display: inline;
+}
+
+/* Panelen lägger sig som ett lager över innehållet i stället för
+   att trycka ner det. Blir listan högre än skärmen scrollar den. */
+.site-nav__panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.25rem 0 0.5rem;
+  list-style: none;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+  max-height: calc(100dvh - 4rem);
+  overflow-y: auto;
+}
+
+.site-nav__panel a {
   display: flex;
   align-items: center;
   min-height: var(--tap);
-  padding-inline: 0.9rem;
-  white-space: nowrap;
-  scroll-snap-align: start;
-  border-radius: 999px;
+  padding: 0.5rem var(--space);
   color: var(--ink);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.95rem;
 }
 
-.site-nav__list a:hover,
-.site-nav__list a:focus-visible {
+.site-nav__panel a:hover,
+.site-nav__panel a:focus-visible {
   background: var(--surface-2);
 }
 
+/* --- Desktop: rad --- */
+
+.site-nav__row {
+  display: none;
+}
+
 @media (min-width: 60rem) {
-  .site-nav__list {
+  .site-nav__burger {
+    display: none;
+  }
+
+  .site-nav__row {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    overflow-x: visible;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.4rem var(--space);
+    list-style: none;
+  }
+
+  .site-nav__row a {
+    display: flex;
+    align-items: center;
+    min-height: var(--tap);
+    padding-inline: 0.9rem;
+    white-space: nowrap;
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .site-nav__row a:hover,
+  .site-nav__row a:focus-visible {
+    background: var(--surface-2);
   }
 }
 
@@ -300,6 +363,20 @@ figcaption {
 @media (min-width: 48rem) {
   .embed {
     aspect-ratio: var(--embed-ratio-md, 16 / 10);
+  }
+}
+
+/* Fast höjd i stället för proportion – som gamla sidans regler-iframe.
+   Hela innehållet visas i sidflödet, ingen inre scroll. */
+.embed--fixed {
+  aspect-ratio: auto;
+  height: var(--embed-h);
+}
+
+@media (min-width: 48rem) {
+  .embed--fixed {
+    aspect-ratio: auto;
+    height: var(--embed-h-md, var(--embed-h));
   }
 }
 
