@@ -97,14 +97,11 @@ async function initMap(container) {
   map.on('load', () => loadAreas(map));
 }
 
-/* --- Vattenområden: fyllnad, namn i mitten och popup ----------------------- */
+/* --- Vattenområden: fyllnad, namn i mitten och popup -----------------------
 
-const AREA_PALETTE = [
-  '#0a7ea4', '#7c9a3d', '#b0651f', '#7261a3', '#2a8f77',
-  '#b4536e', '#5b7fbf', '#8a7a25', '#c07840', '#4f9457',
-  '#a25b9c', '#3b8fa3', '#996c33', '#5f8a52', '#b04a4a',
-  '#4a6fa0', '#8f8f2e',
-];
+   Varje område bär sin egen färg i geojson-filens color-egenskap.
+   Färgerna kommer ur QGIS-projektet och är exakt desamma som i den
+   publicerade SVG-kartan, så webbkartan och den tryckta kartan matchar. */
 
 // Tyngdpunkt för en ring (shoelace). Tillräckligt bra som etikettpunkt
 // för dessa områden – ingen extra geometribibliotek behövs.
@@ -153,12 +150,7 @@ async function loadAreas(map) {
     return;
   }
 
-  // En färg per område, byggt som ett match-uttryck på namnet.
-  const colorExpr = ['match', ['get', 'name']];
-  data.features.forEach((feature, i) => {
-    colorExpr.push(feature.properties.name, AREA_PALETTE[i % AREA_PALETTE.length]);
-  });
-  colorExpr.push('#088');
+  const colorExpr = ['coalesce', ['get', 'color'], '#088'];
 
   map.addSource('vattenomrade', { type: 'geojson', data });
 
