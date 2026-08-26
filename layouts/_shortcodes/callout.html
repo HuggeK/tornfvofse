@@ -1,0 +1,14 @@
+{{/* ---------------------------------------------------------------------------
+     Grön notisruta (ersätter de inline-stylade rutorna i gamla index.html).
+
+     Användning:
+       {{< callout >}}
+       **Fet text**, listor och [länkar](https://…) fungerar här.
+       {{< /callout >}}
+
+     RenderString gör att markdown inuti rutan renderas korrekt, vilket inte
+     är garanterat för markdown inuti en rå <div> i innehållsfilen.
+     --------------------------------------------------------------------------- */}}
+<div class="callout">
+  {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</div>

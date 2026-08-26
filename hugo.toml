@@ -71,10 +71,22 @@ publishDir = 'public'
   source = 'maps'
   target = 'assets/maps'
 
-# Enskild fil kan också monteras: typsnittet ligger kvar i repo-roten.
+# Enskilda filer kan också monteras: typsnittet och PDF:erna i repo-roten.
 [[module.mounts]]
   source = 'Merienda-VariableFont_wght.ttf'
   target = 'static/fonts/Merienda-VariableFont_wght.ttf'
+
+[[module.mounts]]
+  source = 'Informationslapp Fiskekort Törn och Törngöls FVOF.pdf'
+  target = 'static/Informationslapp Fiskekort Törn och Törngöls FVOF.pdf'
+
+[[module.mounts]]
+  source = 'Törn och Törngöls Fiskevårdsområdesförenings stadgar 2026.pdf'
+  target = 'static/Törn och Törngöls Fiskevårdsområdesförenings stadgar 2026.pdf'
+
+[[module.mounts]]
+  source = 'normalstadgar_moderniserad_version_inkl_kommentarer (002).pdf'
+  target = 'static/normalstadgar_moderniserad_version_inkl_kommentarer (002).pdf'
 
 # Dokumentmappar -> static (kopieras rakt av, ingen bearbetning)
 [[module.mounts]]

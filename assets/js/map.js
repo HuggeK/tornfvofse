@@ -79,6 +79,14 @@ async function initMap(container) {
   });
 
   map.addControl(new maplibregl.NavigationControl(), 'top-right');
+  // Samma geolokalisering som på gamla sidan – visa var jag är på sjön.
+  map.addControl(
+    new maplibregl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true,
+    }),
+    'top-right'
+  );
   map.addControl(
     new maplibregl.AttributionControl({
       customAttribution:

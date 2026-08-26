@@ -92,6 +92,12 @@ li {
   text-wrap: pretty; /* inga ensamma ord sist i stycket */
 }
 
+/* Fiskekroken som punkt i innehållslistor – som på gamla sidan.
+   Nav, dokumentlistor och kontaktkort nollställer list-style själva. */
+.prose ul {
+  list-style-image: url('/images/Krok.svg');
+}
+
 a {
   color: var(--water);
   text-underline-offset: 0.2em;
@@ -244,6 +250,19 @@ figure.is-wide {
   max-width: 100%;
 }
 
+/* Liten bild, t.ex. bokomslag. */
+figure.is-small {
+  max-width: 20rem;
+}
+
+/* Inline-loggor i löpande text (Föreningar-listan). */
+.logo-inline {
+  display: inline-block;
+  height: auto;
+  vertical-align: middle;
+  margin-inline: 0.15rem;
+}
+
 figcaption {
   margin-top: 0.5rem;
   padding: 0.5rem 0.75rem;
@@ -346,6 +365,12 @@ figcaption {
 .doc-list__link:focus-visible {
   border-color: var(--water);
   background: var(--surface-2);
+}
+
+/* Rad utan länk (t.ex. pågående ärende med diarienummer). */
+.doc-list__link--plain:hover {
+  border-color: var(--line);
+  background: var(--surface);
 }
 
 .doc-list__type {

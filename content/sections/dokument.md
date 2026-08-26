@@ -2,14 +2,15 @@
 title: Dokument
 navTitle: Dokument
 anchor: Dokument
-weight: 60
+weight: 110
 ---
 
-Listorna nedan byggs från `data/documents.yaml`. Filtyp och filstorlek räknas
-ut automatiskt vid bygget – bra att se innan man laddar ner en stor PDF på 4G.
+{{< docs group="general" >}}
 
-{{< docs group="allmanna" >}}
+### Vattendomen {#vattendomen}
+
+{{< docs group="water-ruling" >}}
 
 ### Mötesprotokoll och kallelser {#motesprotokoll}
 
-{{< docs group="protokoll" >}}
+{{< docs group="minutes" >}}

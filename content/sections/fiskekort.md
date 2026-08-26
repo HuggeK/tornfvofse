@@ -8,13 +8,11 @@ weight: 10
 Fiskekort köps genom iFiske.
 [Köp fiskekort på iFiske ⬈](https://www.ifiske.se/a/552)
 
-<div class="callout">
-
-**Fritt fiske för barn och ungdomar till och med 17 års ålder.**
+{{< callout >}}
+**Fritt fiske för barn och ungdomar till och med en ålder av 17 år.**
 Målsman måste ha tagit del av och godkänt gällande
 [fiskeregler](https://www.ifiske.se/rule/sv/1824) och föreskrifter.
-
-</div>
+{{< /callout >}}
 
 {{< embed src="https://www.ifiske.se/sv/store/2ca80840" title="Köp fiskekort" ratio="4 / 5" ratioMd="16 / 7" >}}
 

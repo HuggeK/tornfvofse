@@ -2,7 +2,7 @@
 title: Kontakt
 navTitle: Kontakt
 anchor: Kontakt
-weight: 50
+weight: 80
 ---
 
 <ul class="contact-grid">
