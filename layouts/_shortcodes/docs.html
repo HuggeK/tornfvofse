@@ -1,0 +1,56 @@
+{{/* ---------------------------------------------------------------------------
+     Dokumentlista från data/documents.yaml.
+
+     Användning:  {{< docs group="protokoll" >}}
+
+     Varje rad blir en 44px hög träffyta med filtyp och filstorlek, i stället
+     för en tunn textlänk som är svår att träffa med tummen. Filstorleken
+     räknas ut vid bygget – bra att veta innan man laddar ner 20 MB på 4G.
+     --------------------------------------------------------------------------- */}}
+
+{{ $group := .Get "group" }}
+{{ $data := index hugo.Data.documents $group }}
+
+{{ if not $data }}
+  {{ errorf "docs: gruppen %q saknas i data/documents.yaml (anropad från %s)" $group .Position }}
+{{ end }}
+
+<ul class="doc-list">
+  {{ range $data.items }}
+    {{ $url := .url }}
+    {{ $isExternal := hasPrefix $url "http" }}
+    {{ $ext := path.Ext $url | strings.TrimPrefix "." | upper }}
+
+    {{/* Filstorlek för lokala filer. os.Stat läser från projektets filsystem. */}}
+    {{ $size := "" }}
+    {{ if not $isExternal }}
+      {{ $path := strings.TrimPrefix "/" $url }}
+      {{ with (os.Stat $path) }}
+        {{ $mb := div (float .Size) 1048576.0 }}
+        {{ if ge $mb 1.0 }}
+          {{ $size = printf "%.1f MB" $mb }}
+        {{ else }}
+          {{ $size = printf "%.0f kB" (div (float .Size) 1024.0) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    <li>
+      <a
+        class="doc-list__link"
+        href="{{ replace $url " " "%20" }}"
+        {{ if $isExternal }}target="_blank" rel="noopener"{{ end }}
+      >
+        <span class="doc-list__type">{{ if $isExternal }}Länk{{ else }}{{ $ext }}{{ end }}</span>
+        <span>
+          {{ .title }}
+          <span class="doc-list__meta">
+            {{- with .note }}{{ . }}{{ end -}}
+            {{- if and .note (or $size $isExternal) }} · {{ end -}}
+            {{- if $isExternal }}Extern länk ⬈{{ else }}{{ $size }}{{ end -}}
+          </span>
+        </span>
+      </a>
+    </li>
+  {{ end }}
+</ul>

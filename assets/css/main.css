@@ -1,0 +1,434 @@
+/* ---------------------------------------------------------------------------
+   Törn och Törngöls FVOF — basstilar
+   Mobile first: allt utanför en @media-fråga gäller telefonen.
+   Vi använder ENDAST min-width (viewport), aldrig min-device-width.
+   --------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Merienda';
+  src: url('/fonts/Merienda-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 300 800;
+  font-display: swap; /* texten syns direkt, typsnittet byts in när det laddat */
+}
+
+:root {
+  color-scheme: light dark;
+
+  --water: #1b5b7a;
+  --water-deep: #0e3a4f;
+  --reed: #9bc67a;
+  --sand: #f6f1e7;
+  --ink: #16211f;
+  --ink-soft: #4a5754;
+  --surface: #ffffff;
+  --surface-2: #f2ede2;
+  --line: #ddd5c6;
+  --focus: #b4530a;
+
+  /* Flytande typografi: skalar mellan 360px och 1200px viewport
+     utan att behöva en enda extra media query. */
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2.125rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 3rem);
+
+  --space: clamp(1rem, 0.8rem + 1.2vw, 2rem);
+  --measure: 68ch;         /* läsbar radlängd */
+  --radius: 12px;
+  --tap: 44px;             /* minsta träffyta enligt WCAG 2.5.8 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sand: #12181a;
+    --ink: #e8eceb;
+    --ink-soft: #a9b6b3;
+    --surface: #1a2224;
+    --surface-2: #222c2e;
+    --line: #33403f;
+    --water: #7fc4e8;
+    --focus: #ffab5e;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%; /* stoppar iOS från att zooma texten i liggande läge */
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;       /* så att #ankare inte hamnar bakom den fasta menyn */
+}
+
+body {
+  margin: 0;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.6;
+  overflow-wrap: break-word; /* långa PDF-namn spränger inte layouten */
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Merienda', Georgia, serif;
+  line-height: 1.15;
+  text-wrap: balance; /* jämnare radbrytning i rubriker på smala skärmar */
+  margin: 0 0 0.4em;
+}
+
+h1 { font-size: var(--step-3); }
+h2 { font-size: var(--step-2); }
+h3 { font-size: var(--step-1); }
+
+p,
+li {
+  text-wrap: pretty; /* inga ensamma ord sist i stycket */
+}
+
+a {
+  color: var(--water);
+  text-underline-offset: 0.2em;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- Layout ---------------------------------------------------------------- */
+
+.wrap {
+  width: min(100% - 2 * var(--space), 72rem);
+  margin-inline: auto;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  background: var(--surface);
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: var(--space);
+  top: var(--space);
+}
+
+/* --- Sidhuvud och navigering ------------------------------------------------ */
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding-block: var(--space);
+  text-align: center;
+}
+
+.site-header__logo {
+  width: min(60vw, 260px);
+  height: auto;
+}
+
+/* Menyn ligger kvar överst vid scroll och blir en swipe-bar på mobil.
+   Ingen JavaScript, ingen hamburgermeny som döljer innehåll. */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top); /* under kameraskåran på nyare telefoner */
+}
+
+.site-nav__list {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.4rem var(--space);
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+.site-nav__list a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding-inline: 0.9rem;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.site-nav__list a:hover,
+.site-nav__list a:focus-visible {
+  background: var(--surface-2);
+}
+
+@media (min-width: 60rem) {
+  .site-nav__list {
+    justify-content: center;
+    overflow-x: visible;
+  }
+}
+
+/* --- Sektioner -------------------------------------------------------------- */
+
+.section {
+  padding-block: clamp(2rem, 6vw, 4rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.section:last-of-type {
+  border-bottom: 0;
+}
+
+.section__anchor {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section__anchor:hover::after {
+  content: ' #';
+  color: var(--ink-soft);
+}
+
+/* --- Bilder ----------------------------------------------------------------- */
+
+/* Ingen fast procentbredd: bilden fyller spalten på mobil och begränsas
+   av --measure på stora skärmar. width/height på <img> hindrar layouthopp. */
+figure {
+  margin: var(--space) 0;
+}
+
+figure img,
+figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+figure.is-photo {
+  max-width: var(--measure);
+}
+
+figure.is-wide {
+  max-width: 100%;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-2);
+  border-left: 3px solid var(--reed);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* --- Inbäddningar (iFiske, karta) ------------------------------------------- */
+
+/* Ersätter height: 1800px. Rutan får sina proportioner av aspect-ratio,
+   och blir hög och smal på mobil men bred och låg på desktop. */
+.embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--embed-ratio, 3 / 4);
+  margin-block: var(--space);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.embed > iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (min-width: 48rem) {
+  .embed {
+    aspect-ratio: var(--embed-ratio-md, 16 / 10);
+  }
+}
+
+/* Kartan laddas först när man scrollar fram den — se assets/js/map.js */
+.map {
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 48rem) {
+  .map {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.map__placeholder {
+  display: grid;
+  place-content: center;
+  gap: 0.75rem;
+  height: 100%;
+  padding: var(--space);
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.map__button {
+  min-height: var(--tap);
+  padding-inline: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --- Dokumentlistor --------------------------------------------------------- */
+
+/* Varje rad är en stor träffyta i stället för en tunn textlänk. */
+.doc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.doc-list__link {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--tap);
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.doc-list__link:hover,
+.doc-list__link:focus-visible {
+  border-color: var(--water);
+  background: var(--surface-2);
+}
+
+.doc-list__type {
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  background: var(--water);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.doc-list__meta {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+/* --- Notisruta -------------------------------------------------------------- */
+
+.callout {
+  margin-block: var(--space);
+  padding: 1rem 1.25rem;
+  background: var(--reed);
+  color: #16211f;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+}
+
+.callout a {
+  color: #0d3d13;
+}
+
+/* --- Kontaktkort ------------------------------------------------------------ */
+
+.contact-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  padding: 0;
+  list-style: none;
+}
+
+.contact-grid a {
+  display: grid;
+  align-content: center;
+  min-height: var(--tap);
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.contact-grid strong {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* --- Sidfot ----------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: var(--space);
+  padding-bottom: calc(var(--space) + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang | default "sv" }}">
+  <head>
+    <meta charset="utf-8" />
+    {{/* viewport-fit=cover krävs för att env(safe-area-inset-*) ska fungera. */}}
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} – {{ site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ .Description | default site.Params.description }}" />
+    <link rel="canonical" href="{{ .Permalink }}" />
+
+    {{/* Färgar adressfältet i mobila webbläsare, ljust och mörkt. */}}
+    <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12181a" media="(prefers-color-scheme: dark)" />
+
+    <link rel="icon" type="image/svg+xml" href="/images/tornfvof_logo.svg" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    {{/* Hugo Pipes: minifiera + fingeravtryck. Filnamnet ändras när innehållet
+         ändras, så filen kan cachas för alltid utan att bli inaktuell. */}}
+    {{ with resources.Get "css/main.css" }}
+      {{ $css := . | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    {{ end }}
+
+    {{/* Kartbiblioteket ligger på en annan domän – öppna anslutningen tidigt
+         så att den är klar den dagen användaren scrollar fram kartan. */}}
+    <link rel="preconnect" href="https://tiles.versatiles.org" crossorigin />
+
+    {{ partial "structured-data.html" . }}
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Hoppa till innehållet</a>
+
+    {{ partial "header.html" . }}
+    {{ partial "nav.html" . }}
+
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+  </body>
+</html>

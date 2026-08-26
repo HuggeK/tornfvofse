@@ -1,0 +1,35 @@
+{{ define "main" }}
+  <div class="wrap">
+    {{ with .Content }}
+      <div class="prose">{{ . }}</div>
+    {{ end }}
+
+    {{/* Ett avsnitt per fil i content/sections/. Ankarlänkarna (#Fiskekort,
+         #Regler, …) behålls exakt som i den gamla index.html så att redan
+         delade länkar fortsätter fungera. */}}
+    {{ $sections := slice }}
+    {{ with site.GetPage "/sections" }}{{ $sections = .RegularPages }}{{ end }}
+    {{ range sort $sections "Weight" }}
+      {{ $anchor := .Params.anchor | default (urlize .Title) }}
+      <section class="section" id="{{ $anchor }}" aria-labelledby="h-{{ $anchor }}">
+        <h2 id="h-{{ $anchor }}">
+          <a class="section__anchor" href="#{{ $anchor }}">{{ .Title }}</a>
+        </h2>
+        <div class="prose">{{ .Content }}</div>
+      </section>
+    {{ end }}
+  </div>
+
+  {{/* Kart-JS skickas bara med om något av avsnitten faktiskt har en karta.
+       .HasShortcode gäller sidans egen text, så vi måste fråga avsnitten med. */}}
+  {{ $needsMap := .HasShortcode "map" }}
+  {{ range $sections }}
+    {{ if .HasShortcode "map" }}{{ $needsMap = true }}{{ end }}
+  {{ end }}
+  {{ if $needsMap }}
+    {{ with resources.Get "js/map.js" }}
+      {{ $js := . | js.Build (dict "minify" true) | fingerprint }}
+      <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

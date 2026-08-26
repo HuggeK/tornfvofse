@@ -1,0 +1,75 @@
+{{/* ---------------------------------------------------------------------------
+     Responsiv bild.
+
+     Användning i markdown:
+       {{< fig src="tornbok/Lilla Kläpp - lossy.webp"
+               alt="Bild över Lilla Kläpp"
+               caption="Lilla Kläpp. © Erland Schön 1981." >}}
+
+     Vad den gör:
+       - skalar om originalet till flera bredder (400–1600px)
+       - skriver ut srcset + sizes så mobilen hämtar den minsta som duger
+       - konverterar till webp
+       - sätter width/height => inget layouthopp (CLS = 0)
+       - loading="lazy" på allt utom den första bilden
+
+     SVG kan inte bearbetas av Hugo och släpps igenom som den är.
+     --------------------------------------------------------------------------- */}}
+
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $caption := .Get "caption" }}
+{{ $class := .Get "class" | default "is-photo" }}
+{{ $eager := eq (.Get "loading") "eager" }}
+
+{{ $res := resources.Get $src }}
+
+{{ if not $res }}
+  {{ errorf "fig: hittar ingen bild på %q (anropad från %s)" $src .Position }}
+{{ end }}
+
+<figure class="{{ $class }}">
+  {{ if eq $res.MediaType.SubType "svg" }}
+    <img
+      src="{{ $res.RelPermalink }}"
+      alt="{{ $alt }}"
+      loading="{{ if $eager }}eager{{ else }}lazy{{ end }}"
+      decoding="async"
+    />
+  {{ else }}
+    {{/* Bredder som täcker allt från liten telefon till 2x desktop. */}}
+    {{ $widths := slice 400 640 900 1200 1600 }}
+    {{ $srcset := slice }}
+    {{ range $widths }}
+      {{ if ge $res.Width . }}
+        {{ $img := $res.Resize (printf "%dx webp" .) }}
+        {{ $srcset = $srcset | append (printf "%s %dw" $img.RelPermalink $img.Width) }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Fallback om originalet är mindre än 400px brett. */}}
+    {{ $fallbackWidth := int (math.Min 1200 $res.Width) }}
+    {{ $fallback := $res.Resize (printf "%dx webp" $fallbackWidth) }}
+    {{ if not $srcset }}
+      {{ $srcset = slice (printf "%s %dw" $fallback.RelPermalink $fallback.Width) }}
+    {{ end }}
+
+    <img
+      src="{{ $fallback.RelPermalink }}"
+      srcset="{{ delimit $srcset ", " }}"
+      {{/* Bilden är full bredd på mobil, men max ~68ch på desktop.
+           sizes talar om det för webbläsaren INNAN CSS:en är läst. */}}
+      sizes="(min-width: 72rem) 68ch, (min-width: 48rem) 60vw, 100vw"
+      width="{{ $fallback.Width }}"
+      height="{{ $fallback.Height }}"
+      alt="{{ $alt }}"
+      loading="{{ if $eager }}eager{{ else }}lazy{{ end }}"
+      {{ if $eager }}fetchpriority="high"{{ end }}
+      decoding="async"
+    />
+  {{ end }}
+
+  {{ with $caption }}
+    <figcaption>{{ . | markdownify }}</figcaption>
+  {{ end }}
+</figure>

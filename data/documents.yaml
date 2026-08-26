@@ -1,0 +1,32 @@
+# Dokumentlistorna bor här i stället för i HTML.
+# Lägg till en rad -> den dyker upp på sidan med filtyp och filstorlek.
+
+allmanna:
+  items:
+    - title: Informationslapp fiskekort
+      url: /Informationslapp Fiskekort Törn och Törngöls FVOF.pdf
+      note: Skriv gärna ut
+    - title: Fiskevårdsplan Törn och Törngöl 2013
+      url: /dokument/Fiskevårdsplan Törn och Törngöl 2013_Optimized - C.pdf
+    - title: PFAS och metaller i kräftor
+      url: /dokument/PFAS och metaller i Kräftor-c.pdf
+    - title: Information om arrende, nyttjanderättsavtal och servitut
+      url: /dokument/Information om Arrende Nyttjanderättsavtal och Servitut TL.pdf
+    - title: Fisketillsyn – utbildning för fisketillsynspersoner
+      url: /dokument/Utbildningsmaterial fisketillsyn.pdf
+      note: Havs- och vattenmyndigheten
+    - title: Sveriges fiskevattenägarförbunds vägledningsmaterial
+      url: https://www.vattenagarna.se/vagledningsmaterial-utan-kostnad/
+
+protokoll:
+  items:
+    - title: Protokoll Fiskestämma 2026 med bilagor
+      url: /protokoll/Protokoll Fiskestämma 2026 Törn och Törngöls FVOF med bilagor C.pdf
+    - title: Kallelse Fiskestämma 2026 samt stadgeförslag
+      url: /protokoll/Kallelse Fiskestämma 2026 Törn och Törngöls FVOF rev 3 med stadgeförslag.pdf
+    - title: Inbjudan medlemsträff Törsbogården 28 juni 2026
+      url: /protokoll/Medelemsträff Törsbo 28 juni 2026.pdf
+    - title: Fiskestämma protokoll 2025
+      url: /protokoll/Fiskestämma protokoll 2025 (1)c.pdf
+    - title: Verksamhetsberättelse 2024
+      url: /protokoll/Verksamhetsberättelse 2024 (2).pdf

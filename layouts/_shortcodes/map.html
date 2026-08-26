@@ -1,0 +1,28 @@
+{{/* ---------------------------------------------------------------------------
+     Karta som laddas först vid behov.
+
+     Gamla sidan hämtade maplibre-gl.js från TVÅ olika CDN:er vid sidladdning
+     (unpkg + versatiles), ca 0,9 MB JS innan något visats. Här laddas
+     biblioteket av assets/js/map.js först när kartan scrollas fram, och
+     bara en gång.
+     --------------------------------------------------------------------------- */}}
+
+{{ $lng := .Get "lng" | default "15.53275" }}
+{{ $lat := .Get "lat" | default "56.562472" }}
+{{ $zoom := .Get "zoom" | default "12" }}
+
+<div
+  class="embed map"
+  id="map"
+  data-map
+  data-center="{{ $lng }},{{ $lat }}"
+  data-zoom="{{ $zoom }}"
+  data-bounds="15.118889,56.431250,15.792722,56.696583"
+  data-style="https://tiles.versatiles.org/assets/styles/colorful/style.json"
+>
+  <div class="map__placeholder">
+    <p>Interaktiv karta över vattenområdena.</p>
+    <button class="map__button" type="button" data-map-load>Visa karta</button>
+    <small>Laddar ca 0,9 MB – undviks automatiskt vid sparläge för data.</small>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+baseURL = 'https://tornfvof.se/'
+locale = 'sv-SE'
+defaultContentLanguage = 'sv'
+title = 'Törn och Törngöls FVOF'
+enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term']
+
+# Bygg med `hugo` och ladda upp innehållet i public/ till webbhotellet.
+publishDir = 'public'
+
+[params]
+  description = 'Fiskekort, regler, vattenområden och djupkartor för Törn och Törngöls fiskevårdsområdesförening.'
+  organizationNumber = '802600-8659'
+  logo = 'images/tornfvof_logo.svg'
+
+[minify]
+  minifyOutput = true
+
+[imaging]
+  resampleFilter = 'Lanczos'
+
+[imaging.webp]
+  # Bra balans mellan kvalitet och vikt för foton på mobil.
+  quality = 78
+
+[imaging.jpeg]
+  quality = 78
+
+[markup.goldmark.renderer]
+  unsafe = true # tillåt inbäddad HTML i markdown
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 2
+
+# --- Mounts -----------------------------------------------------------------
+# Återanvänder de befintliga mapparna i repot i stället för att kopiera dem.
+# Bildmappar monteras in i assets/ så att Hugo kan skala om dem och bygga srcset.
+# OBS: så fort man deklarerar egna mounts måste standardmountsen anges explicit.
+
+[[module.mounts]]
+  source = 'content'
+  target = 'content'
+
+[[module.mounts]]
+  source = 'layouts'
+  target = 'layouts'
+
+[[module.mounts]]
+  source = 'data'
+  target = 'data'
+
+[[module.mounts]]
+  source = 'assets'
+  target = 'assets'
+
+[[module.mounts]]
+  source = 'static'
+  target = 'static'
+
+# Befintliga bildmappar -> assets (bearbetas av Hugo till webp i flera bredder)
+[[module.mounts]]
+  source = 'images'
+  target = 'assets/images'
+
+[[module.mounts]]
+  source = 'tornbok'
+  target = 'assets/tornbok'
+
+[[module.mounts]]
+  source = 'maps'
+  target = 'assets/maps'
+
+# Enskild fil kan också monteras: typsnittet ligger kvar i repo-roten.
+[[module.mounts]]
+  source = 'Merienda-VariableFont_wght.ttf'
+  target = 'static/fonts/Merienda-VariableFont_wght.ttf'
+
+# Dokumentmappar -> static (kopieras rakt av, ingen bearbetning)
+[[module.mounts]]
+  source = 'dokument'
+  target = 'static/dokument'
+
+[[module.mounts]]
+  source = 'protokoll'
+  target = 'static/protokoll'
+
+[[module.mounts]]
+  source = 'dommar'
+  target = 'static/dommar'
+
+[[module.mounts]]
+  source = 'djupkartor'
+  target = 'static/djupkartor'

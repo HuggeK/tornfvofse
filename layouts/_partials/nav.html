@@ -1,0 +1,21 @@
+{{/* Menyn byggs automatiskt av filerna i content/sections/.
+     Lägg till en ny .md-fil så dyker den upp här – ingen HTML att redigera.
+
+     Horisontellt swipe-fält på mobil, centrerad rad på desktop. Ingen
+     JavaScript och ingen hamburgermeny som gömmer navigationen. */}}
+{{ $sections := slice }}
+{{ with site.GetPage "/sections" }}{{ $sections = .RegularPages }}{{ end }}
+
+{{ with sort $sections "Weight" }}
+  <nav class="site-nav" aria-label="Sidans avsnitt">
+    <ul class="site-nav__list">
+      {{ range . }}
+        <li>
+          <a href="#{{ .Params.anchor | default (urlize .Title) }}">
+            {{ .Params.navTitle | default .Title }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </nav>
+{{ end }}

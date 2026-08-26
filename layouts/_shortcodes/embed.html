@@ -1,0 +1,22 @@
+{{/* ---------------------------------------------------------------------------
+     Lat-laddad iframe med proportionerlig ruta.
+
+     Ersätter mönstret `height: 1800px` som gav en enorm tom yta på mobil.
+     Rutan får sin höjd av aspect-ratio: hög och smal på telefon, bred och
+     låg på desktop. loading="lazy" gör att iFiske inte laddas förrän
+     användaren scrollar dit.
+     --------------------------------------------------------------------------- */}}
+
+{{ $src := .Get "src" }}
+{{ $title := .Get "title" | default "Inbäddat innehåll" }}
+{{ $ratio := .Get "ratio" | default "3 / 4" }}
+{{ $ratioMd := .Get "ratioMd" | default "16 / 10" }}
+
+<div class="embed" style="--embed-ratio: {{ $ratio }}; --embed-ratio-md: {{ $ratioMd }};">
+  <iframe
+    src="{{ $src }}"
+    title="{{ $title }}"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>

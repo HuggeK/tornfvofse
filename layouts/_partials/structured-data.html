@@ -1,0 +1,15 @@
+{{/* Hjälper Google visa föreningen korrekt i mobila sökresultat. */}}
+{{ if .IsHome }}
+  {{ $data := dict
+    "@context" "https://schema.org"
+    "@type" "Organization"
+    "name" site.Title
+    "url" site.BaseURL
+    "identifier" site.Params.organizationNumber
+    "email" "web@tornfvof.se"
+    "description" site.Params.description
+  }}
+  <script type="application/ld+json">
+    {{ $data | jsonify (dict "indent" "  ") | safeJS }}
+  </script>
+{{ end }}
