@@ -21,3 +21,8 @@ Fiskekonsult Carl-Johan Månsson på CJ Natur har sammanställt en lista med rå
 - Det finns idag en mängd bra utrustning som kan användas vid C&R; underlagsmattor, håvar, vågpåsar att väga fisken i, kroklossare/tänger mm.
 - Rapportera in fångsten (både fångst och 0-fångst) till iFiske
 {{< /callout >}}
+
+{{< fig
+  src="tornbok/Törestorp - lossy.webp"
+  alt="Bild över Törestorp med en fiskebåt på sjön"
+  caption="Törestorp. © Erland Schön 1981." >}}

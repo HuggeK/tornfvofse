@@ -5,11 +5,6 @@ anchor: batar
 weight: 70
 ---
 
-{{< fig
-  src="tornbok/Törestorp - lossy.webp"
-  alt="Bild över Törestorp med en fiskebåt på sjön"
-  caption="Törestorp. © Erland Schön 1981." >}}
-
 Båtuthyrning görs dag eller halvdag samma dag, sköts av Vissefjärda samhällsförening,
 [vissefjarda.com/vissefjarda-camping](https://vissefjarda.com/vissefjarda-camping/)
 
