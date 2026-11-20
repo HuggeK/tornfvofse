@@ -1,0 +1,48 @@
+[
+  {
+    "id": "torn",
+    "title": "Djupkarta Törn (SMHI, ekolodad 1981)",
+    "url": "/maps/djupkartor/torn.webp",
+    "coordinates": [
+      [
+        15.4807278,
+        56.5948177
+      ],
+      [
+        15.5701914,
+        56.5948177
+      ],
+      [
+        15.5701914,
+        56.530419
+      ],
+      [
+        15.4807278,
+        56.530419
+      ]
+    ]
+  },
+  {
+    "id": "torngol",
+    "title": "Djupkarta Törngöl (SMHI, 1988)",
+    "url": "/maps/djupkartor/torngol.webp",
+    "coordinates": [
+      [
+        15.5184969,
+        56.5907552
+      ],
+      [
+        15.5329264,
+        56.5907552
+      ],
+      [
+        15.5329264,
+        56.5858704
+      ],
+      [
+        15.5184969,
+        56.5858704
+      ]
+    ]
+  }
+]

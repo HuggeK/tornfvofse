@@ -39,9 +39,10 @@
       <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
     {{ end }}
 
-    {{/* Kartbiblioteket ligger på en annan domän – öppna anslutningen tidigt
+    {{/* Kartbiblioteket (jsDelivr) och kartbilderna (versatiles) ligger på andra domäner – öppna anslutningen tidigt
          så att den är klar den dagen användaren scrollar fram kartan. */}}
     <link rel="preconnect" href="https://tiles.versatiles.org" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
     {{ partial "structured-data.html" . }}
   </head>
