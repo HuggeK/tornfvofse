@@ -105,7 +105,9 @@ async function createMap(container) {
       compact: true,
       customAttribution: [
         'Vattenområden baserade på Lantmäteriets Topografi 10 och Fastighetsindelning, bearbetade. CC BY 4.0',
-        'Djupkartor © <a href="https://vattenwebb.smhi.se/">SMHI Vattenwebb</a>, georefererade och omfärgade, <a href="https://creativecommons.org/licenses/by/4.0/deed.sv">CC BY 4.0</a>',
+        // Årtalen står på kartbladen: Törn "Ekolodad sommaren 1981",
+        // Törngöl signerad "PvdB 1988" (mätmetod anges inte).
+        'Djupkartor © <a href="https://vattenwebb.smhi.se/">SMHI Vattenwebb</a>, georefererade och omfärgade, <a href="https://creativecommons.org/licenses/by/4.0/deed.sv">CC BY 4.0</a>. Törn ekolodad sommaren 1981, Törngöl uppmätt 1988. <strong>Obs! Gamla mätningar</strong> – djup och strandlinjer kan ha ändrats sedan dess; använd inte för navigering.',
       ],
     })
   );
