@@ -4,7 +4,7 @@
    - Laddar biblioteket EN gång, först när kartan är på väg in i vyn.
    - Respekterar Data Saver / dyr uppkoppling: då krävs ett knapptryck.
    - Kraschar inte sidan om nätet fallerar.
-   - Lagerpanel: vattenområden och SMHI:s djupkartor kan slås av och på.
+   - Knapp under GPS-knappen slår av och på SMHI:s djupkartor.
    --------------------------------------------------------------------------- */
 
 // MapLibre 6 ges bara ut som ES-modul. Versionen är låst så att inget ändras
@@ -56,7 +56,7 @@ function parseBounds(value) {
   ];
 }
 
-// Returnerar ett löfte om lagerpanelen (eller null om kartan inte kunde laddas).
+// Returnerar ett löfte om djupkartsknappen (eller null om kartan inte kunde laddas).
 function initMap(container) {
   if (!container.mapReady) container.mapReady = createMap(container);
   return container.mapReady;
@@ -110,8 +110,9 @@ async function createMap(container) {
     })
   );
 
-  const layers = new LayerControl(map);
-  map.addControl(layers, 'top-left');
+  // Djupkartsknappen hamnar direkt under GPS-knappen (samma hörn, lagd efter).
+  const depth = new DepthControl(map);
+  map.addControl(depth, 'top-right');
 
   await new Promise((resolve) => map.once('load', resolve));
 
@@ -122,7 +123,8 @@ async function createMap(container) {
   attribution?.classList.remove('maplibregl-compact-show');
 
   await loadAreas(map);
-  return layers;
+  depth.markReady();
+  return depth;
 }
 
 /* --- Vattenområden: fyllnad, namn i mitten och popup -----------------------
@@ -256,14 +258,12 @@ async function loadAreas(map) {
    SMHI:s inskannade djupkartor, georefererade mot Lantmäteriets strandlinje
    (se tools/georef_depth_charts.py). Bilderna ligger i Web Mercator med
    norr uppåt, så de fyra hörnen räcker för att placera dem exakt.
-   Bilderna hämtas först när någon slår på lagret. */
+
+   En enda knapp under GPS-knappen slår av och på båda djupkartorna. När de
+   är på fälls ett reglage för styrkan ut bredvid knappen. Bilderna hämtas
+   först första gången någon slår på dem. */
 
 const DEPTH_MANIFEST = '/maps/djupkartor/djupkartor.json';
-
-const DEPTH_CHARTS = [
-  { id: 'torn', label: 'Djupkarta Törn (1981)' },
-  { id: 'torngol', label: 'Djupkarta Törngöl (1988)' },
-];
 
 let depthManifestPromise = null;
 
@@ -280,55 +280,57 @@ function loadDepthManifest() {
   return depthManifestPromise;
 }
 
-class LayerControl {
+class DepthControl {
   constructor(map) {
     this.map = map;
+    this.enabled = false;
     this.opacity = 0.9;
-    this.inputs = new Map();
+    this.layerIds = [];
+    // Djupkartorna ska ligga ovanför vattenområdena – vänta tills de finns.
+    this.ready = new Promise((resolve) => {
+      this.markReady = resolve;
+    });
   }
 
   onAdd() {
-    const root = document.createElement('details');
-    root.className = 'maplibregl-ctrl maplibregl-ctrl-group map-layers';
+    const root = document.createElement('div');
+    root.className = 'maplibregl-ctrl maplibregl-ctrl-group map-depth';
 
-    const summary = document.createElement('summary');
-    summary.className = 'map-layers__toggle';
-    summary.textContent = 'Lager';
-    root.appendChild(summary);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'map-depth__button';
+    button.title = 'Visa djupkartor';
+    button.setAttribute('aria-label', 'Visa djupkartor');
+    button.setAttribute('aria-pressed', 'false');
+    const icon = document.createElement('span');
+    icon.className = 'maplibregl-ctrl-icon map-depth__icon';
+    icon.setAttribute('aria-hidden', 'true');
+    button.appendChild(icon);
+    button.addEventListener('click', () => this.setEnabled(!this.enabled));
 
-    const body = document.createElement('div');
-    body.className = 'map-layers__body';
-    root.appendChild(body);
-
-    body.appendChild(this.checkbox('areas', 'Vattenområden', true, (on) => this.setAreas(on)));
-    DEPTH_CHARTS.forEach((chart) => {
-      body.appendChild(this.checkbox(chart.id, chart.label, false, (on) => this.setDepth(chart.id, on)));
-    });
-
-    const slider = document.createElement('label');
-    slider.className = 'map-layers__range';
+    const panel = document.createElement('label');
+    panel.className = 'map-depth__slider';
+    panel.hidden = true;
     const caption = document.createElement('span');
-    caption.textContent = 'Djupkartans styrka';
+    caption.className = 'map-depth__caption';
+    caption.textContent = 'Styrka';
     const range = document.createElement('input');
     range.type = 'range';
     range.min = '0.2';
     range.max = '1';
     range.step = '0.05';
     range.value = String(this.opacity);
+    range.setAttribute('aria-label', 'Djupkartans styrka');
     range.addEventListener('input', () => {
       this.opacity = Number(range.value);
-      DEPTH_CHARTS.forEach(({ id }) => {
-        if (this.map.getLayer(`djup-${id}`)) {
-          this.map.setPaintProperty(`djup-${id}`, 'raster-opacity', this.opacity);
-        }
-      });
+      this.layerIds.forEach((id) => this.map.setPaintProperty(id, 'raster-opacity', this.opacity));
     });
-    slider.append(caption, range);
-    body.appendChild(slider);
+    panel.append(caption, range);
 
-    // Öppen från början på stora skärmar, hopfälld på mobil.
-    root.open = window.matchMedia('(min-width: 48rem)').matches;
+    root.append(button, panel);
     this.root = root;
+    this.button = button;
+    this.panel = panel;
     return root;
   }
 
@@ -336,75 +338,69 @@ class LayerControl {
     this.root.remove();
   }
 
-  checkbox(id, text, checked, onChange) {
-    const label = document.createElement('label');
-    label.className = 'map-layers__item';
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.checked = checked;
-    input.addEventListener('change', () => onChange(input.checked));
-    label.append(input, document.createTextNode(text));
-    this.inputs.set(id, input);
-    return label;
-  }
-
-  setAreas(visible) {
-    const value = visible ? 'visible' : 'none';
-    ['vattenomrade', 'vattenomrade-kant', 'vattenomrade-namn'].forEach((id) => {
-      if (this.map.getLayer(id)) this.map.setLayoutProperty(id, 'visibility', value);
-    });
-  }
-
-  anyDepthVisible() {
-    return DEPTH_CHARTS.some(({ id }) => this.inputs.get(id)?.checked);
-  }
-
-  async setDepth(id, visible) {
-    const layerId = `djup-${id}`;
-    if (visible && !this.map.getSource(layerId)) {
-      let chart;
-      try {
-        chart = (await loadDepthManifest()).find((item) => item.id === id);
-      } catch (error) {
-        console.error('Kunde inte ladda djupkartorna', error);
-        this.inputs.get(id).checked = false;
-        return;
-      }
-      if (!chart || this.map.getSource(layerId)) return;
-      this.map.addSource(layerId, { type: 'image', url: chart.url, coordinates: chart.coordinates });
-      // Under namnen så att områdesnamnen fortfarande går att läsa.
-      const before = this.map.getLayer('vattenomrade-namn') ? 'vattenomrade-namn' : undefined;
+  async addLayers() {
+    if (this.layerIds.length) return true;
+    let manifest;
+    try {
+      manifest = await loadDepthManifest();
+    } catch (error) {
+      console.error('Kunde inte ladda djupkartorna', error);
+      return false;
+    }
+    await this.ready;
+    if (this.layerIds.length) return true; // två snabba klick
+    // Under områdesnamnen så att de fortfarande går att läsa.
+    const before = this.map.getLayer('vattenomrade-namn') ? 'vattenomrade-namn' : undefined;
+    manifest.forEach((chart) => {
+      const id = `djup-${chart.id}`;
+      this.map.addSource(id, { type: 'image', url: chart.url, coordinates: chart.coordinates });
       this.map.addLayer(
         {
-          id: layerId,
+          id,
           type: 'raster',
-          source: layerId,
+          source: id,
+          layout: { visibility: 'none' },
           paint: { 'raster-opacity': this.opacity, 'raster-fade-duration': 0 },
         },
         before
       );
+      this.layerIds.push(id);
+    });
+    this.manifest = manifest;
+    return true;
+  }
+
+  async setEnabled(enabled) {
+    this.enabled = enabled;
+    this.button.setAttribute('aria-pressed', String(enabled));
+    this.button.title = enabled ? 'Dölj djupkartor' : 'Visa djupkartor';
+    this.button.setAttribute('aria-label', this.button.title);
+    this.root.classList.toggle('is-active', enabled);
+    this.panel.hidden = !enabled;
+
+    if (enabled && !(await this.addLayers())) {
+      this.enabled = false;
+      this.root.classList.remove('is-active');
+      this.button.setAttribute('aria-pressed', 'false');
+      this.panel.hidden = true;
+      return;
     }
-    // Läs kryssrutan igen: användaren kan ha hunnit ändra sig under laddningen.
-    const shown = this.inputs.get(id).checked;
-    if (this.map.getLayer(layerId)) {
-      this.map.setLayoutProperty(layerId, 'visibility', shown ? 'visible' : 'none');
-    }
+    // Läs om läget: användaren kan ha klickat igen under laddningen.
+    const visibility = this.enabled ? 'visible' : 'none';
+    this.layerIds.forEach((id) => this.map.setLayoutProperty(id, 'visibility', visibility));
     if (this.map.getLayer('vattenomrade')) {
       this.map.setPaintProperty(
         'vattenomrade',
         'fill-opacity',
-        this.anyDepthVisible() ? AREA_FILL_OPACITY_WITH_DEPTH : AREA_FILL_OPACITY
+        this.enabled ? AREA_FILL_OPACITY_WITH_DEPTH : AREA_FILL_OPACITY
       );
     }
   }
 
-  // Används av knappar utanför kartan, t.ex. i avsnittet Djupkartor.
-  async showDepth(id) {
-    const input = this.inputs.get(id);
-    if (!input) return;
-    input.checked = true;
-    await this.setDepth(id, true);
-    const chart = (await loadDepthManifest()).find((item) => item.id === id);
+  // Används av knapparna i avsnittet Djupkartor: slå på och zooma till sjön.
+  async showDepth(chartId) {
+    await this.setEnabled(true);
+    const chart = this.manifest?.find((item) => item.id === chartId);
     if (!chart) return;
     const [[west, north], , [east, south]] = chart.coordinates;
     this.map.fitBounds(
@@ -453,7 +449,7 @@ document.querySelectorAll('[data-map-overlay]').forEach((button) => {
     if (!container) return;
     event.preventDefault();
     container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const layers = await initMap(container);
-    layers?.showDepth(button.dataset.mapOverlay);
+    const depth = await initMap(container);
+    depth?.showDepth(button.dataset.mapOverlay);
   });
 });

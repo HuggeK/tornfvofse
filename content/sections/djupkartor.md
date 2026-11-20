@@ -6,7 +6,8 @@ weight: 40
 ---
 
 Djupkartorna finns också som lager i [den interaktiva kartan](#areas), lagda
-ovanpå dagens strandlinje. Slå av och på dem under **Lager** i kartans hörn.
+ovanpå dagens strandlinje. Slå av och på dem med djupkartsknappen under
+GPS-knappen; när de är på går styrkan att ställa med reglaget bredvid.
 
 ### Törn
 
